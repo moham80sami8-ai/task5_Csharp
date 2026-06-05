@@ -1,0 +1,156 @@
+// part 1 Abstract 
+
+abstract class Notification
+{
+    protected string message;
+
+    public Notification(string message)
+    {
+        this.message = message;
+    }
+
+    public abstract void Send();
+
+    public void Preview()
+    {
+        Console.WriteLine(message);
+    }
+}
+
+// Email
+class EmailNotification : Notification
+{
+    private string email;
+
+    public EmailNotification(string message, string email) : base(message)
+    {
+        this.email = email;
+    }
+
+    public override void Send()
+    {
+        Console.WriteLine("Sending Email to " + email + ": " + message);
+    }
+}
+
+// SMS
+class SMSNotification : Notification
+{
+    private string phone;
+
+    public SMSNotification(string message, string phone) : base(message)
+    {
+        this.phone = phone;
+    }
+
+    public override void Send()
+    {
+        Console.WriteLine("Sending SMS to " + phone + ": " + message);
+    }
+}
+
+// Push
+class PushNotification : Notification
+{
+    private string deviceId;
+
+    public PushNotification(string message, string deviceId) : base(message)
+    {
+        this.deviceId = deviceId;
+    }
+
+    public override void Send()
+    {
+        Console.WriteLine("Sending Push to Device " + deviceId + ": " + message);
+    }
+}
+//part 2 interface
+interface INotification
+{
+    void Send();
+
+}
+
+class EmailNotification2 : INotification
+{
+    private string message;
+    private string email;
+
+    public EmailNotification2(string message, string email)
+    {
+        this.message = message;
+        this.email = email;
+    }
+
+    public void Send()
+    {
+        Console.WriteLine("Sending Email to " + email + ": " + message);
+    }
+}
+
+
+// SMS
+class SMSNotification2 : INotification
+{
+    private string phone;
+    private string message;
+    public SMSNotification2(string message, string phone)
+    {
+        this.message = message;
+        this.phone = phone;
+    }
+
+    public override void Send()
+    {
+        Console.WriteLine("Sending SMS to " + phone + ": " + message);
+    }
+}
+
+// Push
+
+class PushNotification2 : INotification
+{
+    private string deviceId;
+    private string message;
+    public PushNotification2(string message, string deviceId) 
+    {
+        this.deviceId = deviceId;
+        this.message = message;
+    }
+
+    public override void Send()
+    {
+        Console.WriteLine("Sending Push to Device " + deviceId + ": " + message);
+    }
+}
+
+
+
+
+
+
+ static void Main(string[] args)
+ {
+
+     //part 1 abstract
+     Notification n1 = new EmailNotification("Hello Email", "test@mail.com");
+     Notification n2 = new SMSNotification("Hello SMS", "0799999999");
+     Notification n3 = new PushNotification("Hello Push", "Device123");
+
+     n1.Preview();
+     n1.Send();
+
+     n2.Preview();
+     n2.Send();
+
+     n3.Preview();
+     n3.Send();
+
+     //part 2 interface
+
+     INotification b1 = new EmailNotification2("Hello Email", "test@mail.com");
+    INotification b2 = new SMSNotification2("Hello SMS", "0799999999");
+    INotification b3 = new PushNotification2("Hello Push", "Device123");
+
+     b1.Send();
+     b2.Send();
