@@ -1,0 +1,60 @@
+// Base Class
+class Payment
+{
+    // Virtual method
+    public virtual void ProcessPayment()
+    {
+        Console.WriteLine("Processing payment...");
+    }
+
+    // Method Overloading
+    public void Pay(double amount)
+    {
+        Console.WriteLine("Paid: " + amount);
+    }
+
+    public void Pay(double amount, string currency)
+    {
+        Console.WriteLine("Paid: " + amount + " " + currency);
+    }
+}
+
+// Cash Class
+class Cash : Payment
+{
+    public override void ProcessPayment()
+    {
+        Console.WriteLine("Cash payment processed successfully.");
+    }
+}
+
+// Credit Card Class
+class CreditCard : Payment
+{
+    private int cvv;//Field
+
+    // Constructor
+    public CreditCard(int abc)
+    {
+        this.cvv = abc;
+    }
+
+    public override void ProcessPayment()
+    {
+        Console.WriteLine("Credit Card payment processed with CVV: " + cvv);
+    }
+}
+
+            // Cash
+            Payment cash = new Cash();
+            cash.ProcessPayment();
+            cash.Pay(100);
+            cash.Pay(150, "USD");
+
+            Console.WriteLine("-------------");
+
+            // Credit Card
+            Payment card = new CreditCard(123);//abc
+            card.ProcessPayment();
+            card.Pay(200);
+            card.Pay(250, "EUR");
